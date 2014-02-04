@@ -1,0 +1,20 @@
+inp(1,2).
+inp(2,3).
+
+p(edge,2,a,b).
+
+%col(N, C) :- &hexBrave["3col.hex", p, colored](N, C).
+
+%col(N, C) :- CHEX [ "3col.hex"; edge=inp/2; colored ] (N, C). 
+
+ok :- CHEX["b:-x."; x=a/0; b]().
+
+%i(hello).
+%answersets(X, Y) :- IHEX [ "o(Y) :- i(X), &testConcat[X,a](Y)."; i/1; program ](X, Y).
+%atomsinanswerset(U, V) :- answersets(J, Y), IHEX [ "o(Y) :- i(X), &testConcat[X,a](Y)."; i/1; answerset, 0 ](U, V).
+%finaloutput(J, U, V) :- atomsinanswerset(J, Y), IHEX [ "o(Y) :- i(X), &testConcat[X,a](Y)."; i/1; atom, J ](U, V).
+
+res(X, Y) :- &hexInspection[string, "a v b.", bla, program](X, Y).
+%res(X, Y) :- &hexInspection[string, "a v b(q).", bla, answerset, 1](X, Y).
+
+%ok :- BHEX ["3col.hex"; ap/0; ap]().
