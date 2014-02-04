@@ -1,0 +1,9 @@
+inp(p, 1, a).
+inp(p, 1, b).
+inp(r, 1, b).
+as(AS, C) :- &hexInspection[string, "q(X) :- p(X), not r(X).", inp, program](AS, C).
+atoms(Atom, Arity) :- as(AS, C), &hexInspection[string, "q(X) :- p(X), not r(X).",
+                                                    inp, answerset, AS](Atom, Arity).
+parameters(Atom, Index, Term) :- atoms(Atom, Arity),
+                           &hexInspection[string, "q(X) :- p(X), not r(X).",
+                                              inp, atom, Atom](Index, Term).

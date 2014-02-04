@@ -1,0 +1,9 @@
+set1(a).
+set1(b).
+set2(b).
+as(AS, C) :- IHEX["q(X) :- p(X), not r(X)."; p=set1/1, r=set2/1; program](AS, C).
+atoms(Atom, Arity) :- as(AS, C), IHEX["q(X) :- p(X), not r(X).";
+                                      p=set1/1, r=set2/1; answerset, AS](Atom, Arity).
+parameters(Atom, Index, Term) :- atoms(Atom, Arity),
+                           IHEX["q(X) :- p(X), not r(X).";
+                                p=set1/1, r=set2/1; atom, Atom](Index, Term).

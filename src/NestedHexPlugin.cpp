@@ -545,7 +545,7 @@ void NestedHexPlugin::IHEXAtom::retrieve(const Query& query, Answer& answer, Nog
 
 	RegistryPtr reg = getRegistry();
 
-	// input parameters to external atom &hex["type", "prog", p, q](x):
+	// input parameters to external atom &hex["type", "prog", p, qt, qp](x):
 	//	query.input[0] (i.e. "type"): either "file" or "string"
 	//	query.input[1] (i.e. "prog"): filename of the program P over which we do query answering
 	//	query.input[2] (i.e. p): a predicate name; the set F of all atoms over this predicate are added to P as facts before evaluation
@@ -852,7 +852,59 @@ NestedHexPlugin::createParserModules(ProgramCtx& ctx)
 }
 
 void NestedHexPlugin::printUsage(std::ostream& o) const{
-	o << "     --nestedhex                 Activates convenient syntax for queries over nested hex programs" << std::endl;
+	o << "     --nestedhex                 Activates convenient syntax for queries over nested hex programs" << std::endl <<
+	     "                                 The plugin supports the following external atoms:" << std::endl <<
+	     "" << std::endl <<
+	     "                                 - &hexCautious[t, p, i, q](x1, ..., xn) / &hexBrave[t, p, i, q](x1, ..., xn)" << std::endl <<
+	     "" << std::endl <<
+	     "                                      Evaluates the program specified by p (which must be a filename" <<
+	     "                                      if type t=file and the a string containing the rules if t=string)." << std::endl <<
+	     "" << std::endl <<
+	     "                                      Prior to evaluation, p is extended by facts specified in higher-order notation" <<
+	     "                                      by input predicate i. The arity of i is the maximum arity m of all facts to be added + 2." << std::endl <<
+	     "                                      For adding a fact of form f(c1, ..., ck), predicate i is suppose to specify" <<
+	     "                                      element i(f, m, c1, ... ck, empty, ..., empty)," <<
+	     "                                      where the number of terms of form empty is m - k, i.e.," <<
+             "                                      the empty terms fill additional argument positions in i which are not needed for a certain fact" <<
+	     "                                      due to smaller arity." << std::endl <<
+	     "" << std::endl <<
+	     "                                      Parameter q specifies the query predicate of arity n." << std::endl <<
+	     "" << std::endl <<
+	     "                                      The external atom evaluates to true for all values x1, ..., xn" <<
+	     "                                      such that q(x1, ..., xn) is cautiously/bravely true in p extended with the input from i." << std::endl <<
+	     "" << std::endl <<
+	     "                                 - &hexInspection[t, p, i, qt, qp](x1, x2)" << std::endl <<
+	     "" << std::endl <<
+	     "                                      Evaluates the program p of type t extended with input from i as described above." << std::endl <<
+	     "                                      Parameter qp is optional." << std::endl <<
+	     "" << std::endl <<
+	     "                                      If qt=program and qp is missing, then the external atom is true for all pairs (x, n) with 0 <= x <= n," << std::endl <<
+	     "                                      where n is the number of answer sets of the program. Elements x are intended to identify answer sets." << std::endl <<
+	     "" << std::endl <<
+	     "                                      If qt=answerset and qp is an integer, then the external atom is true for all pairs (x, a)" << std::endl <<
+	     "                                      which encode the true atoms in the answer set identified by qp. A pair (x, a) consists of" <<
+	     "                                      an integer identifier x for this atom and its arity a." << std::endl <<
+	     "" << std::endl <<
+	     "                                      If qt=atom and qp is an integer, then the external atom is true for all pairs (x, t)" << std::endl <<
+	     "                                      which encode the atom identified by qp. If the identified atom has arity a, then pairs (x, t)" <<
+	     "                                      for 0 <= x <= a consist of encode the term t at argument position x, where x=0 denotes the predicate name." << std::endl <<
+	     "" << std::endl <<
+	     "                                 The command-line option --nestedhex activates a rewriter, which allows for using a more convenient syntax" <<
+             "                                      (for details see http://www.kr.tuwien.ac.at/research/systems/dlvhex/nestedhexplugin.html)" << std::endl;
+
+
+	// input parameters to external atom &hex["type", "prog", p, qt, qp](x):
+	//	query.input[0] (i.e. "type"): either "file" or "string"
+	//	query.input[1] (i.e. "prog"): filename of the program P over which we do query answering
+	//	query.input[2] (i.e. p): a predicate name; the set F of all atoms over this predicate are added to P as facts before evaluation
+	//	query.input[3] (i.e. query type): one of "program", "answerset", "atom"
+	//	query.input[4] (optional): missing if query type is "program", an answer set index if query type is "answerset", an atom index if query type is "atom"
+	// output:
+	//      if query type is program: pairs (i, n) for all 0 <= i <= n, where n is the number of answer sets of the program
+	//	if query type is answerset: pairs (i, a) for alle atoms with index i in the answer set, and a is the arity of the respective atom
+	//	if query type is atom: pairs (0, p) and (i, t[i]) for all 1 <= i <= a, where p is the predicate of the atom, a is its arity and t[i] is the term at argument position i
+
+
 }
 
 void NestedHexPlugin::setRegistry(RegistryPtr reg){
