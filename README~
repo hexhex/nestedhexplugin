@@ -1,8 +1,8 @@
 # -*- org -*-
 #+STARTUP: showall
 
-DLLitePlugin
-============
+NestedHexPlugin
+===============
 
 This file provides some hints how to install and run the dllite plugin
 for dlvhex.

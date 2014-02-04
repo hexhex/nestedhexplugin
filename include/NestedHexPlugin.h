@@ -44,6 +44,8 @@
 
 DLVHEX_NAMESPACE_BEGIN
 
+namespace nestedhex{
+
 class NestedHexPlugin:
   public PluginInterface
 {
@@ -136,6 +138,8 @@ public:
 	virtual void setRegistry(RegistryPtr reg);
 	virtual void setupProgramCtx(ProgramCtx& ctx);
 };
+
+}
 
 DLVHEX_NAMESPACE_END
 

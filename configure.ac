@@ -37,6 +37,9 @@ AC_LIBTOOL_DLOPEN # we build a module library
 AC_DISABLE_STATIC # we don't need a static library
 AC_PROG_LIBTOOL
 
+# check for dlvhex, sets various variables
+DLVHEX_REQUIRE([2.3.0])
+
 #
 # check for other libraries here
 #

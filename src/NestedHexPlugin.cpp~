@@ -34,7 +34,7 @@
 #include "config.h"
 #endif // HAVE_CONFIG_H
 
-#include "dlvhex2/NestedHexPlugin.h"
+#include "NestedHexPlugin.h"
 #include "dlvhex2/PlatformDefinitions.h"
 #include "dlvhex2/ProgramCtx.h"
 #include "dlvhex2/Registry.h"
@@ -68,15 +68,19 @@ namespace ascii = boost::spirit::ascii;
 	#define CheckPredefinedIDs ((fileID != ID_FAIL && stringID != ID_FAIL && programID != ID_FAIL && answersetID != ID_FAIL && atomID != ID_FAIL && emptyID != ID_FAIL))
 #endif
 
+namespace nestedhex{
+dlvhex::nestedhex::NestedHexPlugin theNestedHexPlugin;
+}
+
 class NestedHexParserModuleSemantics:
 	public HexGrammarSemantics
 {
 public:
-	NestedHexPlugin::CtxData& ctxdata;
+	nestedhex::NestedHexPlugin::CtxData& ctxdata;
 
 	NestedHexParserModuleSemantics(ProgramCtx& ctx):
 		HexGrammarSemantics(ctx),
-		ctxdata(ctx.getPluginData<NestedHexPlugin>())
+		ctxdata(ctx.getPluginData<nestedhex::NestedHexPlugin>())
 	{
 	}
 
@@ -209,7 +213,7 @@ struct sem<NestedHexParserModuleSemantics::nhexAtom>
 		}
 
 
-		NestedHexPlugin::CtxData& ctxdata = mgr.ctx.getPluginData<NestedHexPlugin>();
+		NestedHexPlugin::CtxData& ctxdata = mgr.ctx.getPluginData<nestedhex::NestedHexPlugin>();
 
 		// input is: subprogram name, auxiliary input predicate, query predicate
 		ext.inputs.push_back(calltype);
@@ -230,6 +234,7 @@ struct sem<NestedHexParserModuleSemantics::nhexAtom>
 	}
 };
 
+namespace nestedhex{
 
 // ============================== Class NestedHexPluginAtom ==============================
 
@@ -872,6 +877,8 @@ void NestedHexPlugin::setupProgramCtx(ProgramCtx& ctx){
 	prepareIDs();
 }
 
+}
+
 DLVHEX_NAMESPACE_END
 
 IMPLEMENT_PLUGINABIVERSIONFUNCTION
@@ -880,7 +887,7 @@ IMPLEMENT_PLUGINABIVERSIONFUNCTION
 extern "C"
 void * PLUGINIMPORTFUNCTION()
 {
-	return reinterpret_cast<void*>(& dlvhex::theNestedHexPlugin);
+	return reinterpret_cast<void*>(& dlvhex::nestedhex::theNestedHexPlugin);
 }
 
 /* vim: set noet sw=2 ts=2 tw=80: */
