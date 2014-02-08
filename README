@@ -14,7 +14,7 @@ for dlvhex.
 
   approach for installation.
 
-This is dlvhex-dlliteplugin, a plugin for `dlvhex'.
+This is dlvhex-nestedhexplugin, a plugin for `dlvhex'.
 ** Dependencies
 
 *** boost
