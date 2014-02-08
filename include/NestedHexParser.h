@@ -23,7 +23,7 @@
  */
 
 /**
- * @file Parser.h
+ * @file NestedHexParser.h
  * @author Christoph Redl
  *
  * @brief Implements convenient syntax for nested HEX-programs.
@@ -45,7 +45,7 @@ DLVHEX_NAMESPACE_BEGIN
 
 namespace nestedhex{
 
-class Parser{
+class NestedHexParser{
 public:
 	static void createParserModule(std::vector<HexParserModulePtr>& ret, ProgramCtx& ctx);
 };

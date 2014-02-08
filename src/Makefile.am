@@ -7,7 +7,7 @@ plugin_LTLIBRARIES = libdlvhexplugin-nestedhex.la
 # replace 'plugin' on the left side as above and
 # add all sources of your plugin
 #
-libdlvhexplugin_nestedhex_la_SOURCES = NestedHexPlugin.cpp ExternalAtoms.cpp Parser.cpp
+libdlvhexplugin_nestedhex_la_SOURCES = NestedHexPlugin.cpp ExternalAtoms.cpp NestedHexParser.cpp
 
 #
 # extend compiler flags by CFLAGS of other needed libraries

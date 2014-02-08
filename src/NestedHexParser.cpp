@@ -23,7 +23,7 @@
  */
 
 /**
- * @file Parser.cpp
+ * @file NestedHexParser.cpp
  * @author Christoph Redl
  *
  * @brief Implements convenient syntax for nested HEX-programs.
@@ -35,7 +35,7 @@
 
 #include "NestedHexPlugin.h"
 #include "ExternalAtoms.h"
-#include "Parser.h"
+#include "NestedHexParser.h"
 #include "dlvhex2/PlatformDefinitions.h"
 #include "dlvhex2/ProgramCtx.h"
 #include "dlvhex2/Registry.h"
@@ -328,7 +328,7 @@ public:
 
 } // anonymous namespace
 
-void Parser::createParserModule(std::vector<HexParserModulePtr>& ret, ProgramCtx& ctx){
+void NestedHexParser::createParserModule(std::vector<HexParserModulePtr>& ret, ProgramCtx& ctx){
 	ret.push_back(HexParserModulePtr(new NestedHexParserModule<HexParserModule::BODYATOM>(ctx)));
 }
 

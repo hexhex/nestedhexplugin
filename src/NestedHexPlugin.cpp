@@ -35,7 +35,7 @@
 
 #include "NestedHexPlugin.h"
 #include "ExternalAtoms.h"
-#include "Parser.h"
+#include "NestedHexParser.h"
 #include "dlvhex2/PlatformDefinitions.h"
 #include "dlvhex2/ProgramCtx.h"
 #include "dlvhex2/Registry.h"
@@ -197,7 +197,7 @@ NestedHexPlugin::createParserModules(ProgramCtx& ctx)
 	if (ctxdata.rewrite){
 		// the parser needs the registry, so make sure that the pointer is set
 		DBGLOG(DBG,"rewriting is enabled");
-		Parser::createParserModule(ret, ctx);
+		NestedHexParser::createParserModule(ret, ctx);
 	}
 
 	ctx.getPluginData<NestedHexPlugin>().theNestedHexPlugin = this;

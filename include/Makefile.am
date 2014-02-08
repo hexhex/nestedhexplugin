@@ -1,7 +1,7 @@
 DLLITEHEADERS = \
 		 NestedHexPlugin.h \
 		 ExternalAtoms.h \
-		 Parser.h
+		 NestedHexParser.h
 
 pkginclude_HEADERS = $(DLLITEHEADERS)
 
