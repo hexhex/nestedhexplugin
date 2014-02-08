@@ -24,13 +24,13 @@
 
 /**
  * @file NestedHexParser.h
- * @author Christoph Redl
+ * @author Christoph Redl <redl@kr.tuwien.ac.at
  *
  * @brief Implements convenient syntax for nested HEX-programs.
  */
 
-#ifndef PARSER__HPP_INCLUDED_
-#define PARSER__HPP_INCLUDED_
+#ifndef NESTEDHEXPARSER__HPP_INCLUDED_
+#define NESTEDHEXPARSER__HPP_INCLUDED_
 
 #include "dlvhex2/PlatformDefinitions.h"
 #include "dlvhex2/PluginInterface.h"

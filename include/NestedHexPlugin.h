@@ -24,7 +24,7 @@
 
 /**
  * @file NestedHexPlugin.h
- * @author Christoph Redl
+ * @author Christoph Redl <redl@kr.tuwien.ac.at
  *
  * @brief Supports queries to subprograms.
  */

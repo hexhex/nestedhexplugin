@@ -24,7 +24,7 @@
 
 /**
  * @file NestedHexParser.cpp
- * @author Christoph Redl
+ * @author Christoph Redl <redl@kr.tuwien.ac.at
  *
  * @brief Implements convenient syntax for nested HEX-programs.
  */

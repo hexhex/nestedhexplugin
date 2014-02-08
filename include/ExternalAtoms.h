@@ -24,7 +24,7 @@
 
 /**
  * @file ExternalAtoms.h
- * @author Christoph Redl
+ * @author Christoph Redl <redl@kr.tuwien.ac.at
  *
  * @brief Implements external atoms for nested HEX-programs.
  */
