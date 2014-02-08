@@ -1,4 +1,3 @@
-
 /* dlvhex -- Answer-Set Programming with external interfaces.
  * Copyright (C) 2005, 2006, 2007 Roman Schindlauer
  * Copyright (C) 2006, 2007, 2008, 2009, 2010, 2011 Thomas Krennwallner
@@ -33,6 +32,7 @@
 #ifndef NESTEDHEX_PLUGIN__HPP_INCLUDED_
 #define NESTEDHEX_PLUGIN__HPP_INCLUDED_
 
+#include "ExternalAtoms.h"
 #include "dlvhex2/PlatformDefinitions.h"
 #include "dlvhex2/PluginInterface.h"
 #include "dlvhex2/ComponentGraph.h"
@@ -40,7 +40,6 @@
 #include "dlvhex2/HexParserModule.h"
 #include "dlvhex2/ProgramCtx.h"
 #include <set>
-
 
 DLVHEX_NAMESPACE_BEGIN
 
@@ -50,6 +49,11 @@ class NestedHexPlugin:
   public PluginInterface
 {
 public:
+	friend class NestedHexPluginAtom;
+	friend class CHEXAtom;
+	friend class BHEXAtom;
+	friend class IHEXAtom;
+
 	struct HexAnswer{
 		ProgramCtx pc;
 		ID type;
@@ -70,48 +74,6 @@ public:
 	};
 
 private:
-	// base class for all DL atoms
-	class NestedHexPluginAtom : public PluginAtom{
-	protected:
-		ProgramCtx& ctx;
-		RegistryPtr reg;
-
-		bool positivesubprogram;
-
-		InterpretationPtr translateInputInterpretation(InterpretationConstPtr input);
-	public:
-		NestedHexPluginAtom(std::string predName, ProgramCtx& ctx, bool positivesubprogram = false);
-
-		virtual void retrieve(const Query& query, Answer& answer);
-		virtual void retrieve(const Query& query, Answer& answer, NogoodContainerPtr nogoods);
-		virtual void learnSupportSets(const Query& query, NogoodContainerPtr nogoods);
-
- 		// define an abstract method for aggregating the answer sets (this part is specific for cautious and brave queries)
-		virtual void answerQuery(PredicateMaskPtr pm, const std::vector<InterpretationPtr>& answersets, const Query& query, Answer& answer) = 0;
-	};
-
-	// cautious queries
-	class CHEXAtom : public NestedHexPluginAtom{
-	public:
-		CHEXAtom(ProgramCtx& ctx);
-		virtual void answerQuery(PredicateMaskPtr pm, const std::vector<InterpretationPtr>& answersets, const Query& query, Answer& answer);
-	};
-
-	// brave queries
-	class BHEXAtom : public NestedHexPluginAtom{
-	public:
-		BHEXAtom(ProgramCtx& ctx);
-		virtual void answerQuery(PredicateMaskPtr pm, const std::vector<InterpretationPtr>& answersets, const Query& query, Answer& answer);
-	};
-
-	// inspection of hex program answers
-	class IHEXAtom : public NestedHexPluginAtom{
-	public:
-		IHEXAtom(ProgramCtx& ctx);
-		virtual void retrieve(const Query& query, Answer& answer, NogoodContainerPtr nogoods);
-		virtual void answerQuery(PredicateMaskPtr pm, const std::vector<InterpretationPtr>& answersets, const Query& query, Answer& answer);
-	};
-
 	RegistryPtr reg;
 
 	// initializes the frequently used IDs
