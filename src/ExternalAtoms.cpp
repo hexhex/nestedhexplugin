@@ -108,7 +108,7 @@ InterpretationPtr NestedHexPluginAtom::translateInputInterpretation(Interpretati
 NestedHexPluginAtom::NestedHexPluginAtom(std::string predName, ProgramCtx& ctx, bool positivesubprogram) : PluginAtom(predName, positivesubprogram), ctx(ctx), positivesubprogram(positivesubprogram){
 }
 
-void NestedHexPluginAtom::NestedHexPluginAtom::retrieve(const Query& query, Answer& answer){
+void NestedHexPluginAtom::retrieve(const Query& query, Answer& answer){
 	assert(false && "this method should never be called since the learning-based method is present");
 }
 
